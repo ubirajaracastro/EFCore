@@ -1,0 +1,8 @@
+﻿Nugget - Pacotes do EF Core
+Pomelo.entityframeworkCore.MySQL - Provider MYSQL to EF Core
+EntityFrameworkCore.Tools - linhas de comando - Engenharia Reversa
+Microsoft.EntityFrameworkCore.Proxies - Lazy-load proxies
+
+
+
+Install-Package Microsoft.EntityFrameworkCore.Proxies
