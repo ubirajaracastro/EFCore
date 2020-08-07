@@ -33,7 +33,7 @@ namespace Switch.Infra.Data.Config
                            .WithOne(o => o.Usuario)
                            .HasForeignKey<Identificacao>(o => o.UsuarioId);
 
-            //relation many to many
+            //relation one to many
             builder.HasMany(o => o.Postagens).WithOne(o => o.Usuario);
                                          
         }

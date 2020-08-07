@@ -10,6 +10,11 @@ namespace Switch.Infra.Data.Config
         {
             builder.HasKey(p => p.Id);
             builder.Property(prop => prop.Texto).IsRequired().HasMaxLength(400);
+
+            //relacionamento um para muito invertido. Mas ja foi definido no um para muitos no lado usuario - usuario/postagem na 
+            //classe de config UsuarioCOnfigEsquema
+
+           // builder.HasOne(o => o.Usuario).WithMany(o => o.Postagens);
         }
     }
 }
