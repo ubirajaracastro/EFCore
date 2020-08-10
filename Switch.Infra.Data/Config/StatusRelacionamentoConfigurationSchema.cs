@@ -11,6 +11,14 @@ namespace Switch.Infra.Data.Config
             builder.HasKey(o => o.Id);
             builder.Property(o => o.Descricao).IsRequired();
 
+            builder.HasData(
+               new StatusRelacionamento() { Id = 1, Descricao = "NaoEspecificado" },
+               new StatusRelacionamento() { Id = 2, Descricao = "Solteiro" },
+               new StatusRelacionamento() { Id = 3, Descricao = "Casado" },
+               new StatusRelacionamento() { Id = 4, Descricao = "Em Relacionamento Sério" }
+               );
+
+
         }
     }
 
