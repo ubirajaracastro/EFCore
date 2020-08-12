@@ -5,6 +5,7 @@ using Switch.Domain.Entities;
 using Switch.Infra.CrossCutting.Loggin;
 using Switch.Infra.Data.Context;
 using System;
+using System.Linq;
 
 
 namespace Switch.APP
@@ -15,33 +16,47 @@ namespace Switch.APP
         {
             var usuario = new Usuario()
             {
-                Nome="Mariana",
-                SobreNome="Souza",
-                Email="mariana.souza@gmail.com",
-                DataNascimento=DateTime.Now,
-                Sexo=Switch.Domain.Enums.SexoEnum.Masculino,
-                Senha ="vacaloca171"                            
+                Nome = "Ronaldo",
+                SobreNome = "Souza",
+                Email = "ronaldo.souza@gmail.com",
+                DataNascimento = DateTime.Now,
+                Sexo = Switch.Domain.Enums.SexoEnum.Masculino,
+                Senha = "vacaloca171"
 
             };
 
-            var optionsBuilder = new DbContextOptionsBuilder<SwitchContext>();
-            optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseMySql("Server=localhost;userid=root;password=vacaloca171;database=SwitchDB",
-                a => a.MigrationsAssembly("Switch.Infra.Data"));
+                //var localTrabalho = new LocalTrabalho()
+                //{
+                //    Nome = "SKY",
+                //    DataAdmissao = DateTime.Now.AddYears(3),
+                //    EmpresaAtual = true,
+                //    UsuarioId=1                            
+
+                //};
+
+                var optionsBuilder = new DbContextOptionsBuilder<SwitchContext>();
+                    optionsBuilder.UseLazyLoadingProxies();
+                     optionsBuilder.UseMySql("Server=localhost;userid=root;password=vacaloca171;database=SwitchDB",
+                                     a => a.MigrationsAssembly("Switch.Infra.Data"));
 
             try
             {
-                var dbcontexto = new SwitchContext(optionsBuilder.Options);
+                using (var dbcontexto = new SwitchContext(optionsBuilder.Options))
+                {
 
-                //log
-                dbcontexto.GetService<ILoggerFactory>().AddProvider(new Logger());
+                    
+                    //log
+                    dbcontexto.GetService<ILoggerFactory>().AddProvider(new Logger());
+                    dbcontexto.Usuarios.Where(o => o.Nome == "bira").ToList();
 
-                dbcontexto.Add(usuario);
-                dbcontexto.SaveChanges();
+                    dbcontexto.Usuarios.Add(usuario);
+                    dbcontexto.SaveChanges();
 
+
+                }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string erro = ex.Message;
 
